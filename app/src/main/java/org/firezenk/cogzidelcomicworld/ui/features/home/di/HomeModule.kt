@@ -1,0 +1,38 @@
+package org.firezenk.cogzidelcomicworld.ui.features.home.di
+
+import android.view.ViewGroup
+import dagger.Module
+import dagger.Provides
+import org.firezenk.cogzidelcomicworld.di.modules.ScreenModule
+import org.firezenk.cogzidelcomicworld.ui.features.characters.CharactersScreenRoute
+import org.firezenk.cogzidelcomicworld.ui.features.comics.ComicsScreenRoute
+import org.firezenk.kartographer.library.dsl.route
+import org.firezenk.kartographer.library.types.Path
+import org.firezenk.kartographer.library.types.Route
+import javax.inject.Named
+
+@Module
+class HomeModule(private val container: ViewGroup) : ScreenModule(container) {
+
+    companion object {
+        const val CHARACTERS_ROUTE = "characters"
+        const val COMICS_ROUTE = "comics"
+        const val SERIES_ROUTE = "series"
+    }
+
+    @Provides
+    @Named(CHARACTERS_ROUTE)
+    fun provideCharactersRoute(): Route = route {
+        target = CharactersScreenRoute()
+        path = Path(CHARACTERS_ROUTE)
+        anchor = container
+    }
+
+    @Provides
+    @Named(COMICS_ROUTE)
+    fun provideComicsRoute(): Route = route {
+        target = ComicsScreenRoute()
+        path = Path(COMICS_ROUTE)
+        anchor = container
+    }
+}
